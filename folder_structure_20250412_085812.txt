@@ -1,0 +1,97 @@
+Directory structure: C:\Users\Tomislav\source\repos\tsertic\DotNetInventoryService
+Scan time: 2025-04-12 08:58:12
+
+DotNetInventoryService/
+├── .git/
+│   ├── hooks/
+│   │   ├── applypatch-msg.sample
+│   │   ├── commit-msg.sample
+│   │   ├── fsmonitor-watchman.sample
+│   │   ├── post-update.sample
+│   │   ├── pre-applypatch.sample
+│   │   ├── pre-commit.sample
+│   │   ├── pre-merge-commit.sample
+│   │   ├── pre-push.sample
+│   │   ├── pre-rebase.sample
+│   │   ├── pre-receive.sample
+│   │   ├── prepare-commit-msg.sample
+│   │   ├── push-to-checkout.sample
+│   │   ├── sendemail-validate.sample
+│   │   └── update.sample
+│   ├── info/
+│   │   └── exclude
+│   ├── objects/
+│   │   ├── info/
+│   │   ├── pack/
+│   ├── refs/
+│   │   ├── heads/
+│   │   ├── tags/
+│   ├── HEAD
+│   ├── config
+│   ├── description
+├── .github/
+│   ├── workflows/
+├── .vs/
+│   ├── DotNetInventoryService/
+│   │   ├── CopilotIndices/
+│   │   │   ├── 17.13.444.19527/
+│   │   │   │   ├── CodeChunks.db
+│   │   │   │   └── SemanticSymbols.db
+│   │   ├── v17/
+│   │   │   ├── .wsuo
+│   │   │   ├── DocumentLayout.backup.json
+│   │   │   └── DocumentLayout.json
+│   ├── VSWorkspaceState.json
+│   ├── slnx.sqlite
+├── InventoryApi/
+│   ├── .vs/
+│   │   ├── InventoryApi/
+│   │   │   ├── CopilotIndices/
+│   │   │   │   ├── 17.13.444.19527/
+│   │   │   │   │   ├── CodeChunks.db
+│   │   │   │   │   ├── CodeChunks.db-shm
+│   │   │   │   │   ├── CodeChunks.db-wal
+│   │   │   │   │   ├── SemanticSymbols.db
+│   │   │   │   │   ├── SemanticSymbols.db-shm
+│   │   │   │   │   └── SemanticSymbols.db-wal
+│   │   │   ├── FileContentIndex/
+│   │   │   │   └── c34fff37-5f44-44bf-aeff-191eb7a1d5be.vsidx
+│   │   │   ├── v17/
+│   │   │   │   ├── .suo
+│   │   │   │   └── DocumentLayout.json
+│   ├── Controllers/
+│   │   └── WeatherForecastController.cs
+│   ├── Properties/
+│   │   └── launchSettings.json
+│   ├── bin/
+│   │   ├── Debug/
+│   │   │   ├── net8.0/
+│   ├── obj/
+│   │   ├── Debug/
+│   │   │   ├── net8.0/
+│   │   │   │   ├── ref/
+│   │   │   │   ├── refint/
+│   │   │   │   ├── staticwebassets/
+│   │   │   │   ├── .NETCoreApp,Version=v8.0.AssemblyAttributes.cs
+│   │   │   │   ├── InventoryApi.AssemblyInfo.cs
+│   │   │   │   ├── InventoryApi.AssemblyInfoInputs.cache
+│   │   │   │   ├── InventoryApi.GeneratedMSBuildEditorConfig.editorconfig
+│   │   │   │   ├── InventoryApi.GlobalUsings.g.cs
+│   │   │   │   ├── InventoryApi.assets.cache
+│   │   │   │   ├── InventoryApi.csproj.AssemblyReference.cache
+│   │   │   │   ├── staticwebassets.removed.txt
+│   │   ├── InventoryApi.csproj.nuget.dgspec.json
+│   │   ├── InventoryApi.csproj.nuget.g.props
+│   │   ├── InventoryApi.csproj.nuget.g.targets
+│   │   ├── project.assets.json
+│   │   ├── project.nuget.cache
+│   ├── InventoryApi.csproj
+│   ├── InventoryApi.csproj.user
+│   ├── InventoryApi.http
+│   ├── InventoryApi.sln
+│   ├── Program.cs
+│   ├── WeatherForecast.cs
+│   ├── appsettings.Development.json
+│   ├── appsettings.json
+
+Scan completed in 0.01 seconds.
