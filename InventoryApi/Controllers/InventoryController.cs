@@ -43,6 +43,11 @@ namespace InventoryApi.Controllers
         [HttpPost]
         public async Task<ActionResult<InventoryItem>> PostInventoryItem(InventoryItem inventoryItem)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             _context.InventoryItems.Add(inventoryItem);
 
             await _context.SaveChangesAsync();
@@ -51,30 +56,7 @@ namespace InventoryApi.Controllers
 
         }
 
-        /*  [HttpPut("{id}")]
-          public async Task<IActionResult> PutInventoryItem(int id,InventoryItem inventoryItem)
-          {
-              if(id!= inventoryItem.Id)
-              {
-                  return BadRequest("ID in URL does not match ID in body");
-              }
-              _context.Entry(inventoryItem).State = EntityState.Modified;
-              try {
-                  await _context.SaveChangesAsync();
-              } catch (DbUpdateConcurrencyException) {
-                  if (!InventoryItemExists(id))
-                  {
-                      return NotFound();
-                  }
-                  else
-                  {
-                      throw;
-                  }
-              }
-                  return NoContent();
-          }
-
-  */
+     
 
 
         [HttpPut("{id}")]
@@ -84,6 +66,12 @@ namespace InventoryApi.Controllers
             {
                 return BadRequest("ID in url does not match id in body");
             }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             _context.Entry(inventoryItem).State = EntityState.Modified;
             try {
                 await _context.SaveChangesAsync();
