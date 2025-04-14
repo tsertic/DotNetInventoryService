@@ -19,6 +19,22 @@ namespace InventoryApi
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
             builder.Services.AddDbContext<InventoryDbContext>(options => options.UseSqlServer(connectionString));
 
+            //cors
+            var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
+            builder.Services.AddCors(options => {
+                options.AddPolicy(name: MyAllowSpecificOrigins, policy =>
+                {
+                    policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+                    //In Production
+                    // policy.WithOrigins("https://frontend-adresa.com",
+                    //                    "http://localhost:3000") // Npr. React dev server
+                    //       .AllowAnyHeader()
+                    //       .AllowAnyMethod();
+                });
+            });
+
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -29,7 +45,7 @@ namespace InventoryApi
             }
 
             app.UseHttpsRedirection();
-
+            app.UseCors(MyAllowSpecificOrigins);
             app.UseAuthorization();
 
 
