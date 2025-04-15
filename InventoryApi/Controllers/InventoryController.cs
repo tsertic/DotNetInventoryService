@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using InventoryApi.Data;
 using InventoryApi.Models;
 using Microsoft.EntityFrameworkCore;
+using InventoryApi.Dtos;
 using System.Collections.Generic;
 using System.Threading.Tasks; 
 namespace InventoryApi.Controllers
@@ -20,39 +21,66 @@ namespace InventoryApi.Controllers
 
         //GET AKCIJE
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<InventoryItem>>> GetInventoryItems()
+        public async Task<ActionResult<IEnumerable<InventoryItemDto>>> GetInventoryItems()
         {
-            var items = await _context.InventoryItems.ToListAsync();
-            return Ok(items);
+            var itemsFromDb = await _context.InventoryItems.ToListAsync();
+
+            var itemsDto = itemsFromDb.Select(item => new InventoryItemDto { 
+                Id=item.Id,
+                Name=item.Name,
+                Quantity=item.Quantity,
+                Price=item.Price
+                
+            });
+
+            return Ok(itemsDto);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<InventoryItem>> GetInventoryItem(int id)
+        public async Task<ActionResult<InventoryItemDto>> GetInventoryItem(int id)
         {
-            var inventoryItem = await _context.InventoryItems.FindAsync(id);
-            if (inventoryItem == null)
+            var itemFromDb = await _context.InventoryItems.FindAsync(id);
+            if (itemFromDb == null)
             {
                 return NotFound();
             }
-
-            return Ok(inventoryItem);
+            var itemDto = new InventoryItemDto{
+                Id=itemFromDb.Id,
+                Name=itemFromDb.Name,
+                Quantity=itemFromDb.Quantity,
+                Price=itemFromDb.Price  
+            };
+            return Ok(itemDto);
         }
 
         // POST: api/Inventory
 
         [HttpPost]
-        public async Task<ActionResult<InventoryItem>> PostInventoryItem(InventoryItem inventoryItem)
+        public async Task<ActionResult<InventoryItemDto>> PostInventoryItem(CreateInventoryItemDto createDto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-
-            _context.InventoryItems.Add(inventoryItem);
+            var newItem = new InventoryItem
+            {
+                Name = createDto.Name,
+                Quantity = createDto.Quantity,
+                Price = createDto.Price
+            };
+            _context.InventoryItems.Add(newItem);
 
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetInventoryItem), new { id = inventoryItem.Id }, inventoryItem);
+            var createdItemDto = new InventoryItemDto
+            {
+                Id = newItem.Id,
+                Name = newItem.Name,
+                Quantity = newItem.Quantity,
+                Price = newItem.Price
+            };
+
+            return CreatedAtAction(nameof(GetInventoryItem), new { id = createdItemDto.Id }, createdItemDto);
 
         }
 
@@ -60,23 +88,29 @@ namespace InventoryApi.Controllers
 
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutInventoryItem(int id,InventoryItem inventoryItem)
+        public async Task<IActionResult> PutInventoryItem(int id,UpdateInventoryItemDto updateDto)
         {
-            if (id != inventoryItem.Id)
-            {
-                return BadRequest("ID in url does not match id in body");
-            }
-
+           
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _context.Entry(inventoryItem).State = EntityState.Modified;
+            var itemFromDb = await _context.InventoryItems.FindAsync(id);
+            if (itemFromDb == null)
+            {
+                return NotFound();
+            }
+
+            itemFromDb.Name = updateDto.Name;
+            itemFromDb.Quantity = updateDto.Quantity;
+            itemFromDb.Price = updateDto.Price;
+
+            _context.Entry(itemFromDb).State = EntityState.Modified;
             try {
                 await _context.SaveChangesAsync();
             } catch (DbUpdateConcurrencyException) {
-                if (InventoryItemExists(id))
+                if (!InventoryItemExists(id))
                 {
                     return NotFound();
                 }else
